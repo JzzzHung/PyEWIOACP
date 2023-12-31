@@ -67,8 +67,8 @@ void ValveMotor_init(const int SwitchValvepinList[]){
 
 void loop() {
   python_command();
-  channel_select(command);
-  command = '@';
+  channel_selector(command);
+  command = "@";
 }
 
 void python_command() {
@@ -76,8 +76,12 @@ void python_command() {
   command="";
   delay(1);
 
+  char tmp;
   while(Serial.available()){
-    command+=(char)Serial.read();
+    tmp = Serial.read();
+    if (tmp != '\n') {
+      command += tmp;
+    }
     }
   Serial.println(command);
   }

@@ -15,61 +15,61 @@ class SendCommand:
         self.SerialWrite(command)
 
     def DFPMix(self):
-        command = "n"
+        command = "DFPMix"
         self.SerialWrite(command)
-    
+
     def QFPMix(self):
-        command = "m"
+        command = "QFPMix"
         self.SerialWrite(command)
-    
+
     def QFPXMix(self):
-        command = "x"
+        command = "QFPXMix"
         self.SerialWrite(command)
 
     # Magnetic bead with NAEB Experiment
 
     def LeftIN(self):
-        command = "c"
+        command = "LeftIN"
         self.SerialWrite(command)
 
     def RightIN(self):
-        command = "d"
+        command = "RightIN"
         self.SerialWrite(command)
-    
+
     def ToLeftOut(self):
-        command = "e"
+        command = "ToLeftOut"
         self.SerialWrite(command)
 
     def ToRightOut(self):
-        command = "f"
+        command = "ToRightOut"
         self.SerialWrite(command)
 
     def LeftRightIN(self):
-        command = "g"
+        command = "LeftRightIN"
         self.SerialWrite(command)
 
     def Mix(self):
-        command = "h"
+        command = "Mix"
         self.SerialWrite(command)
 
     def ToTopOut(self):
-        command = "i"
+        command = "ToTopOut"
         self.SerialWrite(command)
 
     def ToBottomOut(self):
-        command = "j"
+        command = "ToBottomOut"
         self.SerialWrite(command)
-        
+
     def TopIN(self):
-        command = "k"
+        command = "TopIN"
         self.SerialWrite(command)
 
     def BottomIN(self):
-        command = "l"
+        command = "BottomIN"
         self.SerialWrite(command)
-    
+
     def LRinAndMix(self):
-        command = "a"
+        command = "LRinAndMix"
         self.SerialWrite(command)
 
     def ServoMag(self):

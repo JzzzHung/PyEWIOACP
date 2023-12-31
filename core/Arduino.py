@@ -19,28 +19,28 @@ class ArduinoUiOperation(ArduinoConnect,SendCommand,ControlArrayMeasure,ControlP
         self.CreateArduinoControlArrayBtn.clicked.connect(self.CreateControlArray)
 
         # Path Control
-        self.SixteenOfOne.clicked.connect(partial(DoThreadJob,self.SeriesLight))
-        self.OneOfOne.clicked.connect(partial(DoThreadJob,self.DFPMix))
-        self.OneOfThree.clicked.connect(partial(DoThreadJob,self.QFPMix))
-        self.TwoOfOne.clicked.connect(partial(DoThreadJob,self.QFPXMix))
-        
+        self.btnSeriesLight.clicked.connect(partial(DoThreadJob,self.SeriesLight))
+        self.btnDFPMix.clicked.connect(partial(DoThreadJob,self.DFPMix))
+        self.btnQFPMix.clicked.connect(partial(DoThreadJob,self.QFPMix))
+        self.btnQFPXMix.clicked.connect(partial(DoThreadJob,self.QFPXMix))
+
         # Magnetic beads with NAEB Experiment Path Control
-        self.FiveOfThree.clicked.connect(partial(DoThreadJob,self.LeftIN))
-        self.FiveOfFour.clicked.connect(partial(DoThreadJob,self.RightIN))
-        self.EightOfOne.clicked.connect(partial(DoThreadJob,self.ToLeftOut))
-        self.EightOfTwo.clicked.connect(partial(DoThreadJob,self.ToRightOut))
-        self.SixOfOne.clicked.connect(partial(DoThreadJob,self.LeftRightIN))
-        self.SixOfTwo.clicked.connect(partial(DoThreadJob,self.Mix))
-        self.SixOfThree.clicked.connect(partial(DoThreadJob,self.TopIN))
-        self.SixOfFour.clicked.connect(partial(DoThreadJob,self.BottomIN))
-        self.SevenOfOne.clicked.connect(partial(DoThreadJob,self.ToTopOut))
-        self.SevenOfTwo.clicked.connect(partial(DoThreadJob,self.ToBottomOut))
+        self.btnLeftIN.clicked.connect(partial(DoThreadJob,self.LeftIN))
+        self.btnRightIN.clicked.connect(partial(DoThreadJob,self.RightIN))
+        self.btnToLeftOut.clicked.connect(partial(DoThreadJob,self.ToLeftOut))
+        self.btnToRightOut.clicked.connect(partial(DoThreadJob,self.ToRightOut))
+        self.btnLeftRightIN.clicked.connect(partial(DoThreadJob,self.LeftRightIN))
+        self.btnMix.clicked.connect(partial(DoThreadJob,self.Mix))
+        self.btnTopIN.clicked.connect(partial(DoThreadJob,self.TopIN))
+        self.btnBottomIN.clicked.connect(partial(DoThreadJob,self.BottomIN))
+        self.btnToTopOut.clicked.connect(partial(DoThreadJob,self.ToTopOut))
+        self.btnToBottomOut.clicked.connect(partial(DoThreadJob,self.ToBottomOut))
 
         # Chemical Mix
-        self.FiveOfOne.clicked.connect(partial(DoThreadJob,self.LRinAndMix))
+        self.btnLRinAndMix.clicked.connect(partial(DoThreadJob,self.LRinAndMix))
 
         # Servo Magnet
-        self.NineOfOne.clicked.connect(partial(DoThreadJob,self.ServoMag))
+        self.btnServoMag.clicked.connect(partial(DoThreadJob,self.ServoMag))
 
         # Control Procedurce UI Block
         self.AddRowBtn.clicked.connect(partial(DoThreadJob,self.AddNewRow))
@@ -56,17 +56,17 @@ class ArduinoUiOperation(ArduinoConnect,SendCommand,ControlArrayMeasure,ControlP
         ArduinoConnect.GetPort(self)
         self.PortComboBox.clear()
         self.PortComboBox.addItems(self.Portlist)
-    
+
     def DoConnect(self):
         self.ArduinoConnectButton.setEnabled(False)
         self.RefreshPortsButton.setEnabled(False)
         self.PortComboBox.setEnabled(False)
         try:
             succ = self.ConnectAction(self.PortComboBox.currentText())
-            
+
             if not succ:
                 raise TimeoutError("Arduino Connect Timeout")
-    
+
             self.ArduinoConnectSucced() #show in status bar
 
 
@@ -74,7 +74,7 @@ class ArduinoUiOperation(ArduinoConnect,SendCommand,ControlArrayMeasure,ControlP
             self.ArduinoConnectButton.setEnabled(True)
             self.RefreshPortsButton.setEnabled(True)
             self.PortComboBox.setEnabled(True)
-    
+
     def CreateControlArray(self):
         
         electrode_num = self.ArduinoElectrodeNumber.value()
