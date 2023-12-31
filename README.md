@@ -15,6 +15,18 @@ if prefer using industrial camera of Basler as video source, please follow the s
 1. Download the [**_pylon_**](https://www.baslerweb.com/en/sales-support/downloads/software-downloads/) camera software suite from basler official website
 2. Install [**_pypylon_**](https://github.com/basler/pypylon) which the python wrapper for the Basler pylon Camera Software Suite
 
+# Installation
+```cmd
+git clone git@github.com:JzzzHung/PyEWIOACP.git
+conda create --name PyEWIOACP python=3.7
+conda activate PyEWIOACP
+cd PyEWIOACP/
+mkdir snapshot_pic
+pip install -r requirements.txt
+```
+* If you don't have git, you can ignore the first line of command and manually download this repository.
+* If you don't have Anaconda or Miniconda, you can ignore the second and the third line of command.
+
 # Architecture
 ![Architecture](Architecture.png)
 
