@@ -7,6 +7,7 @@
 Servo MagnetServo;
 const int servoMagpin = 9;
 
+boolean useServo3wayValve = false;
 Servo Valve;
 const int Valvepin = 10;
 
@@ -30,15 +31,18 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Ready");
   pinmode_init(output);
-  
+
   //ServoMag initialize
   MagnetServo.attach(servoMagpin);
   RotateServo(MagnetServo,170);
-  
+
   //Servo3wayValve initialize
-  ValvePinMode_init(switchValve);
-  Valve.attach(Valvepin);
-  ValveMotor_init(switchValve);
+  if (useServo3wayValve)  {
+    ValvePinMode_init(switchValve);
+    Valve.attach(Valvepin);
+    ValveMotor_init(switchValve);
+  }
+
 }
 
 void pinmode_init(const int pinList[]){
@@ -60,7 +64,7 @@ void ValveMotor_init(const int SwitchValvepinList[]){
     SwitchValveThenRotate(SwitchValvepinList[i], Valve, 0);
   }
 }
-  
+
 void loop() {
   python_command();
   channel_select(command);
@@ -89,7 +93,7 @@ int calc_bit(char num,int i){
     case 0:
         return 0;
     default:
-        return 0;  
+        return 0;
     }
 }
 
