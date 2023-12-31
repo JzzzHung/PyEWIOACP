@@ -1,16 +1,16 @@
 from functools import partial
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, Qt
 
 from core.ThreadJob import DoThreadJob,DoQThreadJob
 from ArduinoModule.connect import ArduinoConnect
 from ArduinoModule.control import SendCommand
-from ArduinoModule.arrayMeasure import ControlArrayMeasure
+from ArduinoModule.procedureGenerator import ProcedureGenerator
 from ArduinoModule.excuteControlProcedure import ControlProcedure
 
-class ArduinoUiOperation(ArduinoConnect,SendCommand,ControlArrayMeasure,ControlProcedure):
+class ArduinoUiOperation(ArduinoConnect,SendCommand,ProcedureGenerator,ControlProcedure):
     def __init__(self):
         super(ArduinoUiOperation,self).__init__()
-        ControlArrayMeasure.__init__(self)
+        ProcedureGenerator.__init__(self)
         self.ThreadTimer = QTimer(self)
 
     def ArduinoUiActionInitialize(self):
@@ -86,19 +86,13 @@ class ArduinoUiOperation(ArduinoConnect,SendCommand,ControlArrayMeasure,ControlP
             self.PortComboBox.setEnabled(True)
 
     def CreateControlArray(self):
-        
         electrode_num = self.ArduinoElectrodeNumber.value()
-
-        DoQThreadJob(self.ProcedureTextToArray).start()
-        # procedure = self.ProcedureTextToArray()
-
-        DoThreadJob(partial(ControlArrayMeasure.CreateControlArray,self,self.procedureMeasureComplete.get(),electrode_num))
+        DoThreadJob(partial(self.createProcedure, electrode_num))
 
         if self.ThreadJobComplete.get():
-            self.ArrayPannelUpdate(self.ArrayComplete.get())
-            self.ThreadTimer.singleShot(5,self.PopupArduinoControlArrayWindowUI.show)
-        
-    
+            self.LiveFrameShowLabel.setTextInteractionFlags(Qt.TextEditorInteraction)
+            self.LiveFrameShowLabel.setText(self.ArrayComplete.get())
+
     def ArrayPannelUpdate(self,string):
         self.PopupArduinoControlArrayWindowUI.ShoWArduinoControlArray.setText(string)
         self.PopupArduinoControlArrayWindowUI.ShoWArduinoControlArray.update()
