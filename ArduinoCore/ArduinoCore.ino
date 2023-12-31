@@ -67,6 +67,7 @@ void ValveMotor_init(const int SwitchValvepinList[]){
 
 void loop() {
   python_command();
+  // if (command[0] != '@' && command[0] != '\0') light_series_debug(command);  // DEBUG
   channel_selector(command);
   command = "@";
 }
