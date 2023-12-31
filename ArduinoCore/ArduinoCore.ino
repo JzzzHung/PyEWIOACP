@@ -116,6 +116,6 @@ void pin_operate(const char control_array[],int array_length){
         shiftOut(data_pin,clock_pin,MSBFIRST,res);
     }
     digitalWrite(latch,HIGH);
-    delay(1500);
+    delay(500);
   }
 }

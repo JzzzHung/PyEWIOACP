@@ -36,8 +36,18 @@ class ArduinoUiOperation(ArduinoConnect,SendCommand,ControlArrayMeasure,ControlP
         self.btnToTopOut.clicked.connect(partial(DoThreadJob,self.ToTopOut))
         self.btnToBottomOut.clicked.connect(partial(DoThreadJob,self.ToBottomOut))
 
+        self.btnMerge.clicked.connect(partial(DoThreadJob,self.Merge))
+        self.btnStraight.clicked.connect(partial(DoThreadJob,self.Straight))
+        self.btnCylcleMove.clicked.connect(partial(DoThreadJob,self.CycleMove))
+        self.btnHybridMix.clicked.connect(partial(DoThreadJob,self.HybridMix))
+        self.btnLeftToRight.clicked.connect(partial(DoThreadJob,self.LeftToRight))
+        self.btnRightToLeft.clicked.connect(partial(DoThreadJob,self.RightToLeft))
+
         # Chemical Mix
         self.btnLRinAndMix.clicked.connect(partial(DoThreadJob,self.LRinAndMix))
+
+        # ACET
+        self.btnACET.clicked.connect(partial(DoThreadJob,self.ACET))
 
         # Servo Magnet
         self.btnServoMag.clicked.connect(partial(DoThreadJob,self.ServoMag))

@@ -19,6 +19,7 @@ CMD_FS commandfsList[] = {
 };
 
 CMD_PO commandpoList[] = {
+    {"ACET", ACET, arrayLength(ACET)},
     {"b", b, arrayLength(b)},
     {"QFPXMix", QFPXMix, arrayLength(QFPXMix)},
     {"QFPMix", QFPMix, arrayLength(QFPMix)},
@@ -34,6 +35,12 @@ CMD_PO commandpoList[] = {
     {"TopIN", TopIN, arrayLength(TopIN)},
     {"BottomIN", BottomIN, arrayLength(BottomIN)},
     {"LRinAndMix", LRinAndMix, arrayLength(LRinAndMix)},
+    {"LeftToRight", LeftToRight, arrayLength(LeftToRight)},
+    {"RightToLeft", RightToLeft, arrayLength(RightToLeft)},
+    {"Merge", Merge, arrayLength(Merge)},
+    {"HybridMix", HybridMix, arrayLength(HybridMix)},
+    {"Straight", Straight, arrayLength(Straight)},
+    {"CycleMove", CycleMove, arrayLength(CycleMove)},
 };
 
 byte channel_selector(String str)

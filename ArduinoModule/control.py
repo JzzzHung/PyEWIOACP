@@ -8,7 +8,10 @@ class SendCommand:
         self.Serial.write(command.encode("utf-8"))
         rv = self.Serial.readline()
         self.Serial.flushInput()
-    
+
+    def ACET(self):
+        command = "ACET"
+        self.SerialWrite(command)
 
     def SeriesLight(self):
         command = "b"
@@ -75,7 +78,31 @@ class SendCommand:
     def ServoMag(self):
         command = "="
         self.SerialWrite(command)
-    
+
+    def LeftToRight(self):
+        command = "LeftToRight"
+        self.SerialWrite(command)
+
+    def RightToLeft(self):
+        command = "RightToLeft"
+        self.SerialWrite(command)
+
+    def Merge(self):
+        command = "Merge"
+        self.SerialWrite(command)
+
+    def Straight(self):
+        command = "Straight"
+        self.SerialWrite(command)
+
+    def CycleMove(self):
+        command = "CycleMove"
+        self.SerialWrite(command)
+
+    def HybridMix(self):
+        command = "HybridMix"
+        self.SerialWrite(command)
+
     def Null(self):
         command = "Hello"
         print(command)
