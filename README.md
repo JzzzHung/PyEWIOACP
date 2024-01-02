@@ -1,5 +1,5 @@
 # PyEWIOACP
-ElectroWetting Image Operate with Arduino Control Platform(PyEWIOACP) is my research tools developed by python programing during the Ph.D.
+ElectroWetting Image Operate with Arduino Control Platform(PyEWIOACP) is [TaroballzChen's](https://github.com/TaroballzChen/PyEWIOACP) research tools developed by python programing during the Ph.D.
 ![MainWindow](MainWindow.png)
 ![Electrowetting](transport.gif)
 
@@ -9,6 +9,7 @@ PyQt5
 pyserial
 opencv-python
 matplotlib
+pandas
 ```
 if prefer using industrial camera of Basler as video source, please follow the steps below
 
