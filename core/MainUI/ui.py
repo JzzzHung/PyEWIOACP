@@ -4,6 +4,7 @@ from core.statusbar import StatusBarDisplay
 from core.Arduino import ArduinoUiOperation
 from core.Camera import CameraUiOperation
 from core.pltWindow import PlotWindowUiOperation
+from core.Instrument import InstrumentUiOperation
 
 UI_Path = "./core/MainUI/PyEWIOACP.ui"
 
@@ -18,7 +19,7 @@ class PopupArduinoArrayUI():
         self.PopupArduinoControlArrayWindowUI.ShoWArduinoControlArray.clear()
 
 
-class main_ui(QtWidgets.QMainWindow,StatusBarDisplay,ArduinoUiOperation,PopupArduinoArrayUI,CameraUiOperation,PlotWindowUiOperation):
+class main_ui(QtWidgets.QMainWindow,StatusBarDisplay,ArduinoUiOperation,PopupArduinoArrayUI,CameraUiOperation,PlotWindowUiOperation,InstrumentUiOperation):
 
     def __init__(self):
         super(main_ui,self).__init__()
@@ -26,6 +27,7 @@ class main_ui(QtWidgets.QMainWindow,StatusBarDisplay,ArduinoUiOperation,PopupArd
         PopupArduinoArrayUI.__init__(self)
         CameraUiOperation.__init__(self)
         PlotWindowUiOperation.__init__(self)
+        InstrumentUiOperation.__init__(self)
         uic.loadUi(UI_Path,self)
         self.InitializeUiAction()
     
@@ -34,6 +36,7 @@ class main_ui(QtWidgets.QMainWindow,StatusBarDisplay,ArduinoUiOperation,PopupArd
         self.ArduinoUiActionInitialize()
         self.CameraUiActionInitialize()
         self.PlotWindowUiActionInitialize()
+        self.InstrumentUiActionInitialize()
 
 
         

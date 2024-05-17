@@ -1,7 +1,7 @@
 from functools import partial
 from PyQt5.QtCore import QTimer, Qt
 
-from core.ThreadJob import DoThreadJob,DoQThreadJob
+from core.ThreadJob import DoThreadJob
 from ArduinoModule.connect import ArduinoConnect
 from ArduinoModule.control import SendCommand
 from ArduinoModule.procedureGenerator import ProcedureGenerator
@@ -11,6 +11,7 @@ class ArduinoUiOperation(ArduinoConnect,SendCommand,ProcedureGenerator,ControlPr
     def __init__(self):
         super(ArduinoUiOperation,self).__init__()
         ProcedureGenerator.__init__(self)
+        ControlProcedure.__init__(self)
         self.ThreadTimer = QTimer(self)
 
     def ArduinoUiActionInitialize(self):

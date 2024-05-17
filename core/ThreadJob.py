@@ -1,5 +1,5 @@
 import threading
-from PyQt5.QtCore import QThread, pyqtSignal
+from PyQt5.QtCore import QThread
 
 def DoThreadJob(target_func):
     THREAD = threading.Thread(target = target_func)
@@ -9,12 +9,15 @@ def DoThreadJob(target_func):
 
 class DoQThreadJob(QThread):
 
-        def __init__(self,func):
-                QThread.__init__(self)
-                self.func = func
-                
-        def __del__(self):
-                self.wait()
+    def __init__(self,func, sleepMSec=0):
+        QThread.__init__(self)
+        self.func = func
+        self.sleepMSec = sleepMSec
 
-        def run(self):
-               self.func()
+    def __del__(self):
+        self.wait()
+
+    def run(self):
+        if self.sleepMSec:
+            self.msleep(self.sleepMSec)
+        self.func()

@@ -10,6 +10,8 @@ pyserial
 opencv-python
 matplotlib
 pandas
+pypylon
+pyvisa
 ```
 if prefer using industrial camera of Basler as video source, please follow the steps below
 
