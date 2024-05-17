@@ -48,9 +48,10 @@ python main.py
 
 # Update
 
-* 2019.9.5 Add module which plotting contours area against frame 
-* 2019.9.10 Add image gray level transform function
+* 2024.05.17 Add Agilent 33500 Series 2-channel waveform generator remote control
+* 2019.09.05 Add module which plotting contours area against frame 
+* 2019.09.10 Add image gray level transform function
 * 2019.12.17 Add IPcamera module 
-* 2020.1.9 Add automated process setup module
-* 2020.1.19 Add pltdata output function & estimate frame gray value function
-* 2020.1.21 Add Estimate time that procedure consuming function 
+* 2020.01.09 Add automated process setup module
+* 2020.01.19 Add pltdata output function & estimate frame gray value function
+* 2020.01.21 Add Estimate time that procedure consuming function 
