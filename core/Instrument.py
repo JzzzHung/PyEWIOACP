@@ -22,11 +22,12 @@ class InstrumentUiOperation(InstrumentConnect):
         self.InstrumentConnectBtn.clicked.connect(partial(DoThreadJob,self.connectInstruments))
 
     def connectInstruments(self):
-        self.InstrumentConnectBtn.setEnabled(False)
-        self.RefreshInstrumentsBtn.setEnabled(False)
-        self.InstrumentComboBox.setEnabled(False)
-        self.instrumentConnectAction(self.InstrumentComboBox.currentText())
-        self.btnOutput.setEnabled(True)
+        succ = self.instrumentConnectAction(self.InstrumentComboBox.currentText())
+        if succ:
+            self.InstrumentConnectBtn.setEnabled(False)
+            self.RefreshInstrumentsBtn.setEnabled(False)
+            self.InstrumentComboBox.setEnabled(False)
+            self.btnOutput.setEnabled(True)
 
     def refreshInstruments(self):
         self.InstrumentDict.clear()

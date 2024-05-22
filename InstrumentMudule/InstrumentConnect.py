@@ -21,4 +21,8 @@ class InstrumentConnect:
 
     # Connect to Agilent 33500 series waveform generator
     def instrumentConnectAction(self, instrName):
-        self.WaveformGenerator = Agilent33522B(self.InstrumentDict[instrName])
+        if instrName != '':
+            self.WaveformGenerator = Agilent33522B(self.InstrumentDict[instrName])
+            return True
+        else:
+            return False

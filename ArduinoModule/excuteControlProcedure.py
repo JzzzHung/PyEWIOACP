@@ -10,6 +10,7 @@ class ControlProcedure:
     def __init__(self):
         self.initActionTypes()
         self.initFG()
+        self.initStatusConst()
 
     def initActionTypes(self):
         self.actionType = 0
@@ -17,9 +18,14 @@ class ControlProcedure:
         self.ARDUINO_ACTION = 1
         self.INSTR_ACTION = 2
 
+    def initStatusConst(self):
+        self.STATUS_NORMAL = 0
+        self.STATUS_EMERGENCY = 1
+
     # Connect to Agilent 33500 series waveform generator
     def initFG(self):
         Series = "335"
+        self.address = ''
         rm = pyvisa.ResourceManager()
         for addr in rm.list_resources():
             try:
@@ -41,7 +47,8 @@ class ControlProcedure:
 
     # Logic
     def StartProcess(self):
-        self.FG = Agilent33522B(self.address)
+        if self.address != '':
+            self.FG = Agilent33522B(self.address)
         self.ProcedureReload()
         self.ControlProcedureList.selectRow(0)
         self.ControlProcedureTimer = QTimer(self)
@@ -69,12 +76,14 @@ class ControlProcedure:
             # Finish
             self.ControlProcedureList.setItem(currentRow,2,QTableWidgetItem("V"))
             if self.isProcessEnd(currentRow,totalRow):
-                DoQThreadJob(self.instrClose, SpendTime).start()
+                if self.actionType == self.INSTR_ACTION:
+                    DoQThreadJob(self.instrClose, SpendTime).start()
                 self.ControlProcedureTimer.stop()
                 return
 
         # Exit
         elif self.actionType == self.ACTION_NOT_FOUND:
+            self.instrClose()
             self.ControlProcedureTimer.stop()
             QMessageBox.information(self,"Action is NOT exists","%s action isn't exists, Please confirm."%Action,QMessageBox.Ok)
             return
@@ -88,10 +97,15 @@ class ControlProcedure:
         f = Action.split(',')[1].split('hz')[0]
         v = self.FG.autoranging('v', float(v))
         f = self.FG.autoranging('f', float(f))
+        if (v == self.FG.P['V_MIN']) and (f == self.FG.P['F_MIN']):
+            self.instrClose()
+            return
         self.FG.applyBurst(v, f)
 
-    def instrClose(self):
+    def instrClose(self, status=0):
         self.FG.close()
+        if status == self.STATUS_EMERGENCY:
+            self.FG.closeSession()
 
     def isProcessEnd(self,currentRow,totalRow):
         if totalRow == (currentRow+1):
@@ -113,8 +127,9 @@ class ControlProcedure:
             self.ControlProcedureList.setItem(row,2,QTableWidgetItem(""))
 
     def StopProcess(self):
-        self.ControlProcedureTimer.stop()
-        self.instrClose()
+        if hasattr(self, 'ControlProcedureTimer'):
+            self.ControlProcedureTimer.stop()
+            self.instrClose(self.STATUS_EMERGENCY)
 
     def GetProcedureFileName(self):
         fileName, _ = QFileDialog.getSaveFileName(self,"Contorl Process File Choose","./ProcessFile", "Text Files(*.pcs)")
