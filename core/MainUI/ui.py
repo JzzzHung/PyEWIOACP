@@ -23,6 +23,7 @@ class main_ui(QtWidgets.QMainWindow,StatusBarDisplay,ArduinoUiOperation,PopupArd
 
     def __init__(self):
         super(main_ui,self).__init__()
+        StatusBarDisplay.__init__(self)
         ArduinoUiOperation.__init__(self)
         PopupArduinoArrayUI.__init__(self)
         CameraUiOperation.__init__(self)

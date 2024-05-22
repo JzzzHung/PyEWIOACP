@@ -28,6 +28,7 @@ class InstrumentUiOperation(InstrumentConnect):
             self.RefreshInstrumentsBtn.setEnabled(False)
             self.InstrumentComboBox.setEnabled(False)
             self.btnOutput.setEnabled(True)
+            self.FGConnectSucced()
 
     def refreshInstruments(self):
         self.InstrumentDict.clear()

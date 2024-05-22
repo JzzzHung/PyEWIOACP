@@ -49,6 +49,7 @@ class ControlProcedure:
     def StartProcess(self):
         if self.address != '':
             self.FG = Agilent33522B(self.address)
+            self.FGConnectSucced()
         self.ProcedureReload()
         self.ControlProcedureList.selectRow(0)
         self.ControlProcedureTimer = QTimer(self)
@@ -130,6 +131,7 @@ class ControlProcedure:
         if hasattr(self, 'ControlProcedureTimer'):
             self.ControlProcedureTimer.stop()
             self.instrClose(self.STATUS_EMERGENCY)
+            self.FGDisconnect()
 
     def GetProcedureFileName(self):
         fileName, _ = QFileDialog.getSaveFileName(self,"Contorl Process File Choose","./ProcessFile", "Text Files(*.pcs)")
