@@ -104,9 +104,10 @@ class ControlProcedure:
         self.FG.applyBurst(v, f)
 
     def instrClose(self, status=0):
-        self.FG.close()
-        if status == self.STATUS_EMERGENCY:
-            self.FG.closeSession()
+        if hasattr(self, 'FG'):
+            self.FG.close()
+            if status == self.STATUS_EMERGENCY:
+                self.FG.closeSession()
 
     def isProcessEnd(self,currentRow,totalRow):
         if totalRow == (currentRow+1):
